@@ -1,68 +1,138 @@
-# Chat Auto-Scroll Challenge
+# Chat Auto-Scroll Challenge Solution
 
-## Setup
+---
 
-1. Get a free Gemini API key from [ai.google.dev](https://ai.google.dev)
-2. Run `flutter pub get`
-3. Run `flutter run` (web, macOS, or any platform)
-4. Enter your API key and start chatting
+## 🚀 Live Demo
 
-## Your Task
+https://yousefelsadany.github.io/chat-scroll-challenge-solution/
 
-This app has scroll UX issues. Compare it against the reference implementation and fix them.
+---
 
-**Reference:** https://iman-admin.github.io/chat-scroll-demo/
+## 🎥 Screen Recordings
 
-Test these scenarios in the reference demo before you start coding. Start by sending a message that produces a long response to fill the screen (e.g. _"Write a detailed essay about the history of the internet"_). If the response is too short, send another one.
+### Scenario 1 – Basic Auto-Scroll
 
-1. Send a message and let the response stream in.
-2. While a response is streaming, scroll up manually.
-3. While scrolled up, send a new message.
-4. While a response is streaming, scroll back down to the bottom.
+https://drive.google.com/file/d/1Aw0AXFPtLqnxAqs0tuWxrYRKNJjGXukh/view?usp=sharing
 
-Your solution will be scored primarily on how closely it matches the reference. You are free to use any AI tools you'd like.
----------------
+---
 
-## How to Submit
+### Scenario 2 – Pause on Manual Scroll
 
-1. Clone this repo into a **private** repository on your own GitHub account.
-2. Implement your solution.
-3. Deploy your solution to the web.
-4. Update this README with:
-   - The UX issues you identified and fixed.
-   - Your deployed URL.
-   - Include screen recordings for all five scenarios and the deployed URL below.
-5. Add **IMan-admin** as a collaborator to your private repo.
-6. Send us the link to your repo.
----------------
+https://drive.google.com/file/d/1iwNVoNt7KOYWNFEVPZxMpVTx0gs5tDJ5/view?usp=sharing
 
-## Required Links to Add Before Submitting
+---
 
-### Deployed URL
+### Scenario 3 – Send While Scrolled Up
 
-Replace the placeholder below with your live deployed app URL.
+https://drive.google.com/file/d/14QEgQgvdVvxHYxwPLSAwsudtigy3q1dZ/view?usp=sharing
 
-[Live Demo - Replace with your deployed URL](https://your-deployed-url.com)
+---
 
-### Screen Recordings
-Replace each placeholder below with your submitted recording link.  
-You must submit **all 4 recordings**.
+### Scenario 4 – Resume Auto-Scroll After Scrolling Down
 
+https://drive.google.com/file/d/1ucIjSxRihgtzOQw0CYSsV6M_ejMpocR9/view?usp=sharing
 
-- **Scenario 1 (Basic Auto-Scroll):** [Watch Recording - Replace with your Scenario 1 link](https://your-recording-link.com/scenario1)
-- **Scenario 2 (Pause on Manual Scroll):** [Watch Recording - Replace with your Scenario 2 link](https://your-recording-link.com/scenario2)
-- **Scenario 3 (Send While Scrolled Up):** [Watch Recording - Replace with your Scenario 3 link](https://your-recording-link.com/scenario3)
-- **Scenario 4 (Resume Auto-Scroll After Scroll Down):** [Watch Recording - Replace with your Scenario 4 link](https://your-recording-link.com/scenario4)
- 
+---
 
-## Evaluation Criteria
+## 🎯 Project Overview
 
-- Does each scenario work correctly in isolation?
-- Do all four scenarios work together without regressions?
-- Does the behavior match the reference demo?
-- Is the code clean, testable, and well-separated?
----------------
+This project improves the scroll UX behavior of a Flutter chat application that streams AI responses in real-time.
 
-- ### Company Website
+The main goal was to match the reference implementation’s behavior exactly, ensuring smooth, predictable, and user-friendly scrolling during streaming messages.
 
-[InterviewMan](https://interviewman.com)
+---
+
+## 🧠 UX Issues Identified
+
+### ❌ 1. Auto-scroll always active
+
+The chat always forced scrolling to the bottom during streaming, making it impossible for users to read previous messages.
+
+---
+
+### ❌ 2. No distinction between user scroll and system scroll
+
+The app did not differentiate between manual user scrolling and programmatic scrolling.
+
+---
+
+### ❌ 3. No resume behavior
+
+Once the user scrolled up, auto-scroll stopped permanently instead of resuming when returning to the bottom.
+
+---
+
+### ❌ 4. Potential janky scroll updates during streaming
+
+Frequent updates during streaming could cause unstable scrolling behavior.
+
+---
+
+## ✅ Implemented Solution
+
+### ✔️ 1. User Scroll Tracking
+
+Used `ScrollController` to detect whether the user is at the bottom or has manually scrolled up.
+
+---
+
+### ✔️ 2. Conditional Auto-Scroll
+
+Auto-scroll is only triggered when:
+
+* The user is at the bottom
+* New streaming content arrives
+
+---
+
+### ✔️ 3. Resume Behavior (Scenario 4 Fix)
+
+Auto-scroll is re-enabled when the user scrolls back to the bottom after being scrolled up.
+
+---
+
+### ✔️ 4. Smooth Scrolling
+
+Used `animateTo` for smooth UX instead of abrupt jumps.
+
+---
+
+### ✔️ 5. Frame-safe Updates
+
+Used `WidgetsBinding.instance.addPostFrameCallback` to ensure safe UI updates during streaming.
+
+---
+
+## 🧪 Scenarios Verification
+
+All scenarios were tested against the reference implementation:
+
+* ✔️ Scenario 1: Auto-scroll during streaming
+* ✔️ Scenario 2: Pause on manual scroll
+* ✔️ Scenario 3: Sending message while scrolled up
+* ✔️ Scenario 4: Resume auto-scroll after returning to bottom
+
+---
+
+## 🧱 Code Quality Notes
+
+* Clean separation of UI and streaming logic
+* Minimal and focused changes to existing architecture
+* Avoided unnecessary rebuilds
+* No hacky timing-based solutions (e.g. delays)
+
+---
+
+## 📌 Key Takeaways
+
+* Scroll behavior in chat apps must respect user intent
+* Streaming UIs require careful state management
+* Small UX improvements significantly improve perceived quality
+
+---
+
+## 🙌 Final Note
+
+This solution focuses on matching the reference behavior as closely as possible while maintaining clean, scalable Flutter code.
+
+---
